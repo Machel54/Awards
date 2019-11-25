@@ -53,3 +53,23 @@ def project(request,project_id):
     else:
         form = VoteForm()
     return render(request,'project.html',{'form':form,'project':project,'rating':rating})
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    profile = UserProfile.objects.filter(user = request.user).first()
+    projects = Project.objects.filter(user = request.user).all()
+
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST,instance=profile,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('profile'))
+    else:
+        form = ProfileEditForm(instance=profile)
+
+    context = {
+        'profile':profile,
+        'projects':projects,
+        'form':form,
+    }
+    return render(request,'profile.html',context)
