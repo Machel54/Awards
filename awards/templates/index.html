@@ -1,11 +1,57 @@
-{%extends 'all-awards/base.html'%}
+{% extends 'all-awards/base.html' %}
 {% load bootstrap4 %}
-{%  load static %}
-
-
 {% block content %}
-{{block.super}}
+<div class="container-fluid">
+
+  <!-- Best Project is displayed here -->
+
+  {% if best_project %}
+  <div class="best-project" style="background:url('{{best_project.landing_page.url}}')">
+    <img src="http://joshuapekera.github.io/awwwards-retina-ribbons/img/ribbon-white.png" alt="">
+    <div class="progress-circle content" data-progress='{{best_project.content}}'></div>
+    <div class="progress-circle design" data-progress='{{best_project.design}}'></div>
+    <div class="progress-circle usability" data-progress='{{best_project.usability}}'></div>
+  </div>
+  <div class="best-project-text">
+    <h3 class="text-center">{{best_project.project_title}}</h3>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <a href="{% url 'project' best_project.pk %}" class="btn aqua-gradient text-white">See More</a>
+      </div>
+      <div class="col-md-4">
+        <a target="_blank" href="{{best_project.live_site}}" class="btn aqua-gradient text-white">Visit Site</a>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <p class="text-center">By {{best_project.user.username}} with {{best_rating}}</p>
+  </div>
+  {% endif %}
 
 
+  <!-- Other Projects are displayed here -->
+  <h3 class="text-center header">Other Projects</h3>
+  <hr class="text-muted">
+  <div class="projects row">
+    {% for project in projects %}
+    <div class="other-projects col-md-3">
+      <img class="landing-page" src="{{project.landing_page.url}}" alt="">
+      <div class="project-text">
+        <h3 class="text-center">{{project.project_title}}</h3>
+        <div class="d-flex justify-content-between">
+          <a href="{% url 'project' project.pk %}" class="btn">See More</a>
+          <a target="_blank" href="{{project.live_site}}" class="btn">Visit Site</a>
+        </div>
+        <ul class="d-flex justify-content-between">
+          <li>Design: {{project.design}}</li>
+          <li>Usability: {{project.usability}}</li>
+          <li>Content: {{project.content}}</li>
+        </ul>
+        <p class="text-center">By: <span>{{project.user.username}}</span></p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
+</div>
 {% endblock %}
