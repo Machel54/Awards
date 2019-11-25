@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-xl navbar-inverse fixed-top">
-      <a class="navbar-brand" href="">Awwwards</a>
+      <a class="navbar-brand" href="{% url 'index'%}">Awwwards</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
           <i class="fas fa-ellipsis-v"></i>
@@ -8,7 +8,7 @@
   
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="search-box">
-          <form class="form-inline my-2 my-lg-0 mx-auto" role="search" action="">
+          <form class="form-inline my-2 my-lg-0 mx-auto" role="search" action="{% url 'search_project' %}">
             <input class=" search-txt" type="text" placeholder="Search Project" name='project'>
             <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
           </form>
