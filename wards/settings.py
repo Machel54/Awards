@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'url_or_relative_url_field',
+    'tinymce',
     'awards',
     'bootstrap4',
     'django.contrib.admin',
