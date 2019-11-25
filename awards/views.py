@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile,Project
 from django.db.models import Max,F
 from .forms import NewProjectForm,VoteForm,ProfileEditForm
+from django.urls import reverse
+
 
 # Create your views here.
 def index(request):
@@ -73,3 +75,18 @@ def profile(request):
         'form':form,
     }
     return render(request,'profile.html',context)
+
+@login_required(login_url='/accounts/login/')
+def submit_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST,request.FILES)
+
+        if form.is_valid():
+            project = Project(project_title=request.POST['project_title'],landing_page=request.FILES['landing_page'],project_description=request.POST['project_description'],live_site=request.POST['live_site'],user=request.user)
+            project.save()
+            return redirect(reverse('index'))
+    else:
+        form = NewProjectForm()
+
+    return render(request,'submit_project.html',{'form':form})
