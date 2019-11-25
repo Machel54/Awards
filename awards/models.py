@@ -3,18 +3,18 @@ from tinymce.models import HTMLField
 from url_or_relative_url_field.fields import URLOrRelativeURLField
 
 # Create your models here.
-class User(models.Model):
-    user_name = models.CharField(max_length=10)
-    first_name = models.CharField(max_length =10)
-    last_name = models.CharField(max_length =10)
-    email = models.EmailField()
+# class User(models.Model):
+#     user_name = models.CharField(max_length=30)
+#     first_name = models.CharField(max_length =30)
+#     last_name = models.CharField(max_length =30)
+#     email = models.EmailField()
    
-    def __str__(self):
-        return self.user_name 
-    class Meta:
-        ordering = ['user_name']
-    def save_user(self):
-        self.save()
+#     def __str__(self):
+#         return self.user_name 
+#     class Meta:
+#         ordering = ['user_name']
+#     def save_user(self):
+#         self.save()
      
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -35,10 +35,10 @@ class UserProfile(models.Model):
         self.save()
 
     def __str__(self):
-        return self.user.username   
-
+        return self.user.username
+    
 class Project(models.Model):
-    project_title = models.CharField(max_length=10)
+    project_title = models.CharField(max_length=40)
     project_description = HTMLField()
     landing_page = models.ImageField(upload_to='landing_pages')
     live_site = URLOrRelativeURLField()
