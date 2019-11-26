@@ -39,7 +39,7 @@ class UserProfile(models.Model):
         return self.user.username
     
 class Project(models.Model):
-    project_title = models.CharField(max_length=40)
+    project_title = models.CharField(max_length=35)
     project_description = HTMLField()
     landing_page = models.ImageField(upload_to='landing_pages')
     live_site = URLOrRelativeURLField()
@@ -48,6 +48,7 @@ class Project(models.Model):
     usability = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     vote_submissions = models.IntegerField(default=0)
+    
 
     def save_project(self):
         self.save()
