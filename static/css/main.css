@@ -352,14 +352,17 @@ h3.search{
   }
 
   .navbar-collapse {
-    background-color: #fff;
+    color: #fff;
   }
 
   .navbar-collapse li {
     padding-left: 20px;
+    color: white;
   }
 
   .navbar-collapse .search-box {
+    background:white;
+    color: black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -369,7 +372,8 @@ h3.search{
     padding-left: 50px;
   }
   .navbar-toggler{
-    padding-right: 100px;
+    padding-right: 50px;
+    background: #f4f7f6;
   }
   .best-project{
     width: 1000px;
